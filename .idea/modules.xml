@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Publication_Compare.iml" filepath="$PROJECT_DIR$/.idea/Publication_Compare.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/expdata-interface.iml" filepath="$PROJECT_DIR$/.idea/expdata-interface.iml" />
-    </modules>
-  </component>
-</project>
