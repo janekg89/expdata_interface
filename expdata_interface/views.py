@@ -8,7 +8,6 @@ from .models import Publication,Author
 from django.template import loader
 from django.urls import reverse
 from django.views import generic
-import simplejson
 # Create your views here.
 
 
