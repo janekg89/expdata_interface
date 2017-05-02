@@ -14,5 +14,14 @@ from django.views import generic
 def index(request):
     #json_stuff = simplejson.dumps({"Publications": Publication.objects.all()})
     #return HttpResponse(json_stuff, content_type ="application/json")
-    return HttpResponse(list(Author.objects.all()))
+
+    latest_publication_list= Publication.objects.order_by('-year')[:20]
+    #template =loader.get_template('expdata_interface/index.html')
+    context = {'latest_publications_list': latest_publication_list}
+    #output = ', '.join([q.title for q in latest_publication_list])
+
+    return render(request,'expdata_interface/index.html',context)
+    #return HttpResponse(output)
+
+
 
