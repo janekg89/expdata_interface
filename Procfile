@@ -1,1 +1,1 @@
-web: gunicorn expdata_interface.wsgi
+web: python manage.py runserver
