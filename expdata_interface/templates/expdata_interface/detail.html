@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<h4>
+    {{ publication.title }}
+</h4>
+<h6>Abstract:</h6>
+{{publication.abstract}}
+<h6>Authors:</h6>
+<p>
+{% for author in publication.author.all %}
+     <a href="{% url 'expdata_interface:author' author.id %}">{{author}} </a>  &nbsp;
+{% endfor %}
+</p>
+
+<p>
+<h6>MeSH Terms:</h6>
+
+{% for meSH in publication.meSH.all %}
+    <a href="{% url 'expdata_interface:meSH' meSH.id %}"> {{ meSH}} </a> &nbsp;
+{% endfor %}
+</p>
+
+</body>
+</html>

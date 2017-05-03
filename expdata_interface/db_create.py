@@ -52,7 +52,8 @@ class Db_create(object):
             #print('-' * 80)
             publication_in_db,created = Publication.objects.get_or_create(title=record['TI'],
                                                                             pmid= record['PMID'],
-                                                                            journal=record['JT'])
+                                                                            journal=record['JT'],
+                                                                          )
             if 'AB' in record.keys():
                 publication_in_db.abstract= record['AB']
                 publication_in_db.save()

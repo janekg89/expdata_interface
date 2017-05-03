@@ -1,0 +1,8 @@
+<h4>{{author.name}}</h4>
+<h6> (co)authored publications:</h6>
+
+{% for publication in author.publication_set.all %}
+    <p>
+    <a href="/expdata_interface/{{publication.id}}/">{{publication.title}}</a>
+    </p>
+{% endfor %}

@@ -14,7 +14,6 @@ class Author(models.Model):
 
 class MeSHs(models.Model):
     meSH =models.TextField(blank=False)
-
     def __str__(self):
         return self.meSH
 
