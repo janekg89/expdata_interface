@@ -25,7 +25,7 @@ SECRET_KEY = 'gw1)ktv+v^_=p9btpve*vc9hf2^ns18$x9q1@%&sovfe^%wl+5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['calm-temple-10636.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
