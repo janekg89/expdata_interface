@@ -1,6 +1,5 @@
-<head>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-</head>
+{% extends "expdata_interface/base.html" %}
+{% block content %}
 <h4>{{author.name}}</h4>
 <h6> (co)authored publications:</h6>
 
@@ -9,3 +8,4 @@
     <a href="/expdata_interface/{{publication.id}}/">{{publication.title}}</a>
     </p>
 {% endfor %}
+{% endblock %}

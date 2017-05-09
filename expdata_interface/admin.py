@@ -8,12 +8,12 @@ from .models import Author, Publication
 #class AuthorAdmin(admin.ModelAdmin):
 #    pass
 
-# class PublicationAdmin(admin.ModelAdmin):
-#    fields = ('pmid', 'title')
+class PublicationAdmin(admin.ModelAdmin):
+    fields = ('pmid', 'title', 'abstract', 'journal')
 
 
 # admin.site.register(Author, AuthorAdmin)
-# admin.site.register(Publication, PublicationAdmin)
+admin.site.register(Publication, PublicationAdmin)
 
 admin.site.register(Author)
-admin.site.register(Publication)
+#admin.site.register(Publication)
