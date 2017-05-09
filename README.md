@@ -13,8 +13,19 @@ mkvirtualenv expdata_interface
 ```
 
 ## usage
-### How to fill the database with data?
-`expdata_interface/db_create.py` : reads data and fills database
+Database can be filled with bibliography data with corresponding figures, tables, datasets
+`expdata_interface/db_create.py` : script to fill database
+
+To run the web interface locally use
+```
+python manage.py runserver 8001
+http://127.0.0.1:8001/expdata_interface/
+```
+
+Add user for admin interface
+```
+python manage.py createsuperuser
+```
 
 
 
@@ -28,6 +39,7 @@ venv/
 ## todo
 - link local bootstrap
 - rename model fields
+- write some example tests (for db)
 
 ## questions
 - what is `base_site.html` template and where is the `base.html` ?

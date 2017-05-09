@@ -27,18 +27,27 @@ class MeSHs(models.Model):
 
 class Publication(models.Model):
     """ Publication. """
-    author = models.ManyToManyField(Author, blank=True)
-    title = models.TextField(blank=False)
     pmid = models.IntegerField(blank=False)
+    title = models.TextField(blank=False)
+    abstract = models.TextField(blank=True)
     journal = models.CharField(max_length=30, blank=True)
     year = models.DateField(blank=True, null=True)
     volume = models.IntegerField(blank=True, null=True)
     number = models.IntegerField(blank=True, null=True)
-    abstract = models.TextField(blank=True)
+    author = models.ManyToManyField(Author, blank=True)
     meSH = models.ManyToManyField(MeSHs, blank=True)
 
     def __str__(self):
-        return self.title
+        return self.short_title
+
+    @property
+    def short_title(self):
+        length = 40
+        if len(self.title) > length:
+            title = self.title[0:length] + "..."
+        else:
+            title = self.title
+        return "[{}] {}".format(self.pmid, title)
 
 
 class PublicationData(models.Model):

@@ -72,6 +72,7 @@ class DBCreator(object):
         records = DBCreator.load_medline_records(pmid_list)
 
         counter = 0
+        publications_created = 0
         publications_with_abstracts = 0
         publications_with_meSHs = 0
         for k, record in enumerate(records):
@@ -81,29 +82,31 @@ class DBCreator(object):
             publication_in_db, created = Publication.objects.get_or_create(title=record['TI'],
                                                                            pmid=record['PMID'],
                                                                            journal=record['JT'])
-            # abstracts (does not always exist)
-            if 'AB' in record.keys():
-                publication_in_db.abstract = record['AB']
-                publication_in_db.save()
-                publications_with_abstracts += 1
+            if created:
+                publications_created += 1
+                # abstracts (does not always exist)
+                if 'AB' in record.keys():
+                    publication_in_db.abstract = record['AB']
+                    publication_in_db.save()
+                    publications_with_abstracts += 1
 
-            # authors
-            names = record['AU']
-            for name in names:
-                name_in_db, created = Author.objects.get_or_create(name=name)
-                if created:
-                    name_in_db.save()
-                publication_in_db.author.add(Author.objects.get(name=name))
-
-            # mesh terms
-            if 'MH' in record.keys():
-                meSHs = record['MH']
-                publications_with_meSHs += 1
-                for meSH in meSHs:
-                    meSH_in_db, created = MeSHs.objects.get_or_create(meSH=meSH)
+                # authors
+                names = record['AU']
+                for name in names:
+                    name_in_db, created = Author.objects.get_or_create(name=name)
                     if created:
-                        meSH_in_db.save()
-                    publication_in_db.meSH.add(MeSHs.objects.get(meSH=meSH))
+                        name_in_db.save()
+                    publication_in_db.author.add(Author.objects.get(name=name))
+
+                # mesh terms
+                if 'MH' in record.keys():
+                    meSHs = record['MH']
+                    publications_with_meSHs += 1
+                    for meSH in meSHs:
+                        meSH_in_db, created = MeSHs.objects.get_or_create(meSH=meSH)
+                        if created:
+                            meSH_in_db.save()
+                        publication_in_db.meSH.add(MeSHs.objects.get(meSH=meSH))
 
             counter += 1
 
@@ -117,6 +120,7 @@ class DBCreator(object):
             warnings.warn("Some PMIDs could not be retrieved from medline.")
         print('PMIDs: ', len(pmid_list))
         print('records: ', counter)
+        print('publications created:', publications_created)
         print('-'*80)
 
 
