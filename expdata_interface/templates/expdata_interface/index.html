@@ -1,25 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<style>
-table, th, td {
-    border: 1px solid black;
-    text-align: left;
-}
-</style>
-</head>
-<body>
+{% extends "expdata_interface/base.html" %}
+{% block content %}
 {% if publication_list %}
-    <table style="width:100%">
+
+<table id="publications" class="table table-striped">
      <caption>List of Publications</caption>
+<thead>
   <tr>
-    <th>Title</th>
-    <th>Author</th>
-    <th>MeSH terms</th>
+      <th>PMID</th>
+      <th>Title</th>
+      <th>Author</th>
+      <th>MeSH terms</th>
   </tr>
+</thead>
+<tbody>
      {% for publication in publication_list %}
          <tr>
+             <td>
+                 <a href="https://www.ncbi.nlm.nih.gov/pubmed/{{ publication.pmid }}" target="_blank">PMID:{{ publication.pmid }}</a>
+             </td>
              <td>
                  <a href="/expdata_interface/{{publication.id}}/">{{publication.title}}</a></td>
              <td>
@@ -29,17 +27,24 @@ table, th, td {
              </td>
 
             <td>
-                {% for meSH in publication.meSH.all %}
-                    <a href="{% url 'expdata_interface:meSH' meSH.id %}">{{meSH}} </a>  &nbsp;
+                {% for mesh in publication.mesh.all %}
+                    <a href="{% url 'expdata_interface:mesh' mesh.id %}">{{mesh}} </a>  &nbsp;
                 {% endfor %}
             </td>
          </tr>
      {% endfor %}
+</tbody>
 </table>
 
 {% else %}
-    <p>Something went wrong! </p>
+    <p>No publictions in database.</p>
 {% endif %}
+{% endblock %}
 
-</body>
-</html>
+{% block javascript %}
+<script type="text/javascript" charset="utf-8">
+   $(document).ready(function() {
+    $('#publications').DataTable();
+} );
+</script>
+{% endblock %}

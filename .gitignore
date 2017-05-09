@@ -1,3 +1,7 @@
 .idea/
 .envrc
 *.pyc
+*.log
+expdata_interface/__pycache__/
+expdata_interface/migrations/__pycache__/
+my_site/__pycache__/

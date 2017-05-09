@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-</head>
-<body>
+{% extends "expdata_interface/base.html" %}
+{% block content %}
 <h4>
-    {{ publication.title }}
+    [{{ publication.pmid }}] {{ publication.title }}
 </h4>
 <h6>Abstract:</h6>
 {{publication.abstract}}
@@ -19,10 +15,8 @@
 <p>
 <h6>MeSH Terms:</h6>
 
-{% for meSH in publication.meSH.all %}
-    <a href="{% url 'expdata_interface:meSH' meSH.id %}"> {{ meSH}} </a> &nbsp;
+{% for mesh in publication.mesh.all %}
+    <a href="{% url 'expdata_interface:mesh' mesh.id %}"> {{ mesh}} </a> &nbsp;
 {% endfor %}
 </p>
-
-</body>
-</html>
+{% endblock %}

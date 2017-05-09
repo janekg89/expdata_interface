@@ -1,52 +1,73 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
-import datetime
+"""
+Model definition for database.
+"""
+from __future__ import absolute_import, print_function, unicode_literals
 
 from django.db import models
+import datetime
 from django.utils import timezone
-# Create your models here.
+
 
 class Author(models.Model):
-    name=models.CharField(max_length=100,blank=True)
+    """ Author description. """
+    name = models.CharField(max_length=100,blank=True)
+
     def __str__(self):
         return self.name
 
-class MeSHs(models.Model):
-    meSH =models.TextField(blank=False)
+
+class Mesh(models.Model):
+    """ Mesh term. """
+    mesh = models.TextField(blank=False)
+
     def __str__(self):
-        return self.meSH
+        return self.mesh
+
 
 class Publication(models.Model):
-    author=models.ManyToManyField(Author,blank=True)
-    title=models.TextField(blank=False)
+    """ Publication. """
     pmid = models.IntegerField(blank=False)
-    journal=models.CharField(max_length=30,blank=True)
-    year=models.DateField(blank=True,null=True)
-    volume= models.IntegerField(blank=True,null=True)
-    number=models.IntegerField(blank=True,null=True)
-    abstract=models.TextField(blank=True)
-    meSH=models.ManyToManyField(MeSHs,blank=True)
+    title = models.TextField(blank=False)
+    abstract = models.TextField(blank=True)
+    journal = models.CharField(max_length=30, blank=True)
+    year = models.DateField(blank=True, null=True)
+    volume = models.IntegerField(blank=True, null=True)
+    number = models.IntegerField(blank=True, null=True)
+    author = models.ManyToManyField(Author, blank=True)
+    mesh = models.ManyToManyField(Mesh, blank=True)
 
     def __str__(self):
-        return self.title
+        return self.short_title
 
+    @property
+    def short_title(self):
+        length = 40
+        if len(self.title) > length:
+            title = self.title[0:length] + "..."
+        else:
+            title = self.title
+        return "[{}] {}".format(self.pmid, title)
 
-class Publication_data(models.Model):
-    data_name=models.CharField(max_length=30,blank=False)
-    publication=models.ForeignKey(Publication)
+'''
+class PublicationData(models.Model):
+    """ CSV raw data for figures or table. """
+
+    name = models.CharField(max_length=30, blank=False)
+    publication = models.ForeignKey(Publication)
 
     def __str__(self):
-        return self.data_name
+        return self.name
 
-class Publication_figure(models.Model):
-    figure_name=models.CharField(max_length=30,blank=False)
-    publication=models.ForeignKey(Publication)
-    related_data=models.ManyToManyField(Publication_data, blank=True)
+
+class PublicationFigure(models.Model):
+    """ Figure."""
+    name = models.CharField(max_length=30,blank=False)
+    publication = models.ForeignKey(Publication)
+    related_data = models.ManyToManyField(PublicationData, blank=True)
 
     def __str__(self):
-        return self.figure_name
+        return self.name
+'''
 
-
-
-
+# TODO: table
