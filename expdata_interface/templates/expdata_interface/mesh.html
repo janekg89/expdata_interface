@@ -2,7 +2,7 @@
 {% block content %}
 
 <h4>MeSH term: {{meshs}}</h4>
-<h6> publications containing the meSH term: {{meshs}} :</h6>
+<h6> publications containing the mesh term: {{meshs}} :</h6>
 
 {% for publication in meshs.publication_set.all %}
     <p>

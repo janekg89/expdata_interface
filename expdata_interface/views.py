@@ -4,7 +4,7 @@ Database views.
 """
 
 from __future__ import unicode_literals
-from .models import Publication, Author, MeSHs
+from .models import Publication, Author, Mesh
 from django.views import generic
 
 
@@ -28,8 +28,8 @@ class AuthorView(generic.DetailView):
 
 
 class MeSHView(generic.DetailView):
-    template_name = 'expdata_interface/meSH.html'
-    model = MeSHs
+    template_name = 'expdata_interface/mesh.html'
+    model = Mesh
 
 
 

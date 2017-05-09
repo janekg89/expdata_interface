@@ -15,8 +15,7 @@ print(os.environ["DJANGO_SETTINGS_MODULE"])
 import django
 django.setup()
 
-from expdata_interface.models import (Author, Publication, MeSHs,
-                                      PublicationFigure, PublicationData)
+from expdata_interface.models import (Author, Publication, Mesh)  # PublicationFigure, PublicationData
 
 
 class DBCreator(object):
@@ -74,7 +73,7 @@ class DBCreator(object):
         counter = 0
         publications_created = 0
         publications_with_abstracts = 0
-        publications_with_meSHs = 0
+        publications_with_meshs = 0
         for k, record in enumerate(records):
             print('Record: {}'.format(k))
 
@@ -100,13 +99,13 @@ class DBCreator(object):
 
                 # mesh terms
                 if 'MH' in record.keys():
-                    meSHs = record['MH']
-                    publications_with_meSHs += 1
-                    for meSH in meSHs:
-                        meSH_in_db, created = MeSHs.objects.get_or_create(meSH=meSH)
+                    meshs = record['MH']
+                    publications_with_meshs += 1
+                    for mesh in meshs:
+                        mesh_in_db, created = Mesh.objects.get_or_create(mesh=mesh)
                         if created:
-                            meSH_in_db.save()
-                        publication_in_db.meSH.add(MeSHs.objects.get(meSH=meSH))
+                            mesh_in_db.save()
+                        publication_in_db.mesh.add(Mesh.objects.get(mesh=mesh))
 
             counter += 1
 
@@ -114,7 +113,7 @@ class DBCreator(object):
         print("ratio of publications with abstracts: {:1.2}".format(
               float(publications_with_abstracts)/counter))
         print("ratio of publications with MeSHs: {:1.2}".format(
-              float(publications_with_meSHs)/counter))
+              float(publications_with_meshs)/counter))
 
         if counter != len(pmid_list):
             warnings.warn("Some PMIDs could not be retrieved from medline.")

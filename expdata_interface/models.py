@@ -17,12 +17,12 @@ class Author(models.Model):
         return self.name
 
 
-class MeSHs(models.Model):
+class Mesh(models.Model):
     """ Mesh term. """
-    meSH = models.TextField(blank=False)
+    mesh = models.TextField(blank=False)
 
     def __str__(self):
-        return self.meSH
+        return self.mesh
 
 
 class Publication(models.Model):
@@ -35,7 +35,7 @@ class Publication(models.Model):
     volume = models.IntegerField(blank=True, null=True)
     number = models.IntegerField(blank=True, null=True)
     author = models.ManyToManyField(Author, blank=True)
-    meSH = models.ManyToManyField(MeSHs, blank=True)
+    mesh = models.ManyToManyField(Mesh, blank=True)
 
     def __str__(self):
         return self.short_title
@@ -49,7 +49,7 @@ class Publication(models.Model):
             title = self.title
         return "[{}] {}".format(self.pmid, title)
 
-
+'''
 class PublicationData(models.Model):
     """ CSV raw data for figures or table. """
 
@@ -68,5 +68,6 @@ class PublicationFigure(models.Model):
 
     def __str__(self):
         return self.name
+'''
 
 # TODO: table

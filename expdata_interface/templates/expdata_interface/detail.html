@@ -15,8 +15,8 @@
 <p>
 <h6>MeSH Terms:</h6>
 
-{% for meSH in publication.meSH.all %}
-    <a href="{% url 'expdata_interface:meSH' meSH.id %}"> {{ meSH}} </a> &nbsp;
+{% for mesh in publication.mesh.all %}
+    <a href="{% url 'expdata_interface:mesh' mesh.id %}"> {{ mesh}} </a> &nbsp;
 {% endfor %}
 </p>
 {% endblock %}

@@ -1,13 +1,35 @@
+{% load static from staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<style>
-table, th, td {
-    border: 1px solid black;
-    text-align: left;
-}
-</style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Experimental Data Interface">
+    <meta name="author" content="Janek">
+
+    <link rel="icon" href="_report/images/sbml.ico">
+    <title>expdata_interface</title>
+
+    <!-- Bootstrap & datatables -->
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'expdata_interface/css/bootstrap.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'expdata_interface/css/dataTables.bootstrap.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'expdata_interface/css/custom.css' %}"/>
+
+    <!-- JS -->
+    <script type="text/javascript" src="{% static 'expdata_interface/js/jquery-1.12.4.js' %}"></script>
+    <script type="text/javascript" src="{% static 'expdata_interface/js/bootstrap.js' %}"></script>
+    <script type="text/javascript" src="{% static 'expdata_interface/js/jquery.dataTables.js' %}"></script>
+    <script type="text/javascript" src="{% static 'expdata_interface/js/dataTables.bootstrap.js' %}"></script>
+
 </head>
-<body>{% block content %}{% endblock %}</body>
+<body>
+
+
+{% block content %}{% endblock %}
+{% block javascript %}{% endblock %}
+</body>
 </html>

@@ -13,8 +13,16 @@ mkvirtualenv expdata_interface
 ```
 
 ## usage
+Create empty database
+```
+python manage.py makemigrations
+python manage.py migrate
+```
+
 Database can be filled with bibliography data with corresponding figures, tables, datasets
 `expdata_interface/db_create.py` : script to fill database
+
+
 
 To run the web interface locally use
 ```
@@ -37,9 +45,11 @@ venv/
 ```
 
 ## todo
-- link local bootstrap
-- rename model fields
-- write some example tests (for db)
+- navigation menu html
+- views for figures, tables, csv
+- update admin list views
+- custom css instead of headings
+
 
 ## questions
 - what is `base_site.html` template and where is the `base.html` ?
