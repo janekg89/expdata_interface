@@ -1,0 +1,14 @@
+study	compartment	sex	time	r_median	r_min	r_max	r_mean	r_sd
+Spigset1999a	serum	M	3	0.32	0.22	0.47	0.34	0.08
+Spigset1999a	serum	M	4	0.40	0.27	0.64	0.43	0.11
+Spigset1999a	serum	M	5	0.50	0.31	0.83	0.54	0.16
+Spigset1999a	serum	M	6	0.57	0.38	0.94	0.59	0.18
+Spigset1999a	serum	M	8	0.78	0.47	1.44	0.82	0.29
+Spigset1999a	serum	M	10	0.94	0.50	1.66	0.97	0.35
+Spigset1999a	saliva	M	3	0.36	0.23	0.54	0.36	0.09
+Spigset1999a	saliva	M	4	0.45	0.28	0.71	0.47	0.13
+Spigset1999a	saliva	M	5	0.58	0.37	0.78	0.55	0.13
+Spigset1999a	saliva	M	6	0.70	0.45	1.01	0.70	0.18
+Spigset1999a	saliva	M	8	0.90	0.55	1.28	0.88	0.25
+Spigset1999a	saliva	M	10	1.00	0.61	1.49	1.02	0.28
+

@@ -1,0 +1,12 @@
+<head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+</head>
+<h4>MeSH term: {{meshs}}</h4>
+
+<h6> publications containing the meSH term: {{meshs}} :</h6>
+
+{% for publication in meshs.publication_set.all %}
+    <p>
+    <a href="/expdata_interface/{{publication.id}}/">{{publication.title}}</a>
+    </p>
+{% endfor %}

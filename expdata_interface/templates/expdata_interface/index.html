@@ -1,10 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>All publications</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<style>
+table, th, td {
+    border: 1px solid black;
+    text-align: left;
+}
+</style>
 </head>
 <body>
+{% if publication_list %}
+    <table style="width:100%">
+     <caption>List of Publications</caption>
+  <tr>
+    <th>Title</th>
+    <th>Author</th>
+    <th>MeSH terms</th>
+  </tr>
+     {% for publication in publication_list %}
+         <tr>
+             <td>
+                 <a href="/expdata_interface/{{publication.id}}/">{{publication.title}}</a></td>
+             <td>
+                {% for author in publication.author.all %}
+                   <a href="{% url 'expdata_interface:author' author.id %}">{{author}} </a>  &nbsp;
+                {% endfor %}
+             </td>
+
+            <td>
+                {% for meSH in publication.meSH.all %}
+                    <a href="{% url 'expdata_interface:meSH' meSH.id %}">{{meSH}} </a>  &nbsp;
+                {% endfor %}
+            </td>
+         </tr>
+     {% endfor %}
+</table>
+
+{% else %}
+    <p>Something went wrong! </p>
+{% endif %}
 
 </body>
 </html>
