@@ -1,10 +1,11 @@
 """
 Script for creating and filling database.
 """
-from __future__ import print_function, absolute_import
+from __future__ import print_function, absolute_import, division
 
 import re
 import os
+import warnings
 from Bio import Entrez
 from Bio import Medline
 
@@ -22,22 +23,6 @@ class DBCreator(object):
     """ 
     Fill the database with publications, authors.
     """
-
-    @staticmethod
-    def find_between(s, first, last):
-        """ Returns string between first and last.
-        
-        :param s: 
-        :param first: 
-        :param last: 
-        :return: 
-        """
-        try:
-            start = s.index(first) + len(first)
-            end = s.index(last, start)
-            return s[start:end]
-        except ValueError:
-            return ""
 
     @staticmethod
     def get_pmids_from_bib(bib_file):
@@ -90,7 +75,7 @@ class DBCreator(object):
         publications_with_abstracts = 0
         publications_with_meSHs = 0
         for k, record in enumerate(records):
-            print('Record: {}/{} [{}]'.format(k, len(records), 1.0*k/len(records)))
+            print('Record: {}'.format(k))
 
             # add publication
             publication_in_db, created = Publication.objects.get_or_create(title=record['TI'],
@@ -109,7 +94,7 @@ class DBCreator(object):
                 if created:
                     name_in_db.save()
                 publication_in_db.author.add(Author.objects.get(name=name))
-                publication_in_db.save()
+
             # mesh terms
             if 'MH' in record.keys():
                 meSHs = record['MH']
@@ -119,15 +104,19 @@ class DBCreator(object):
                     if created:
                         meSH_in_db.save()
                     publication_in_db.meSH.add(MeSHs.objects.get(meSH=meSH))
-                    publication_in_db.save()
 
             counter += 1
 
         print('-' * 80)
-        print("ratio of publications with existing abstracts:",
-              float(publications_with_abstracts)/len(records))
-        print("ratio of publication with existing MeSHs:",
-              float(publications_with_meSHs)/len(records))
+        print("ratio of publications with abstracts: {:1.2}".format(
+              float(publications_with_abstracts)/counter))
+        print("ratio of publications with MeSHs: {:1.2}".format(
+              float(publications_with_meSHs)/counter))
+
+        if counter != len(pmid_list):
+            warnings.warn("Some PMIDs could not be retrieved from medline.")
+        print('PMIDs: ', len(pmid_list))
+        print('records: ', counter)
         print('-'*80)
 
 

@@ -28,7 +28,6 @@ venv/
 ## todo
 - link local bootstrap
 - rename model fields
-- delete obsolete functions db_create
 
 ## questions
 - what is `base_site.html` template and where is the `base.html` ?
